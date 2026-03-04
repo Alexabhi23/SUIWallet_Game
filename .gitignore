@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+dist/
+dist-ssr/
+
+# Build artifacts
+*.local
+tsc-errors.txt
+build-out.txt
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables
+.env
+.env.local
+.env.production

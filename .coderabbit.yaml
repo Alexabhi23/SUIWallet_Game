@@ -1,0 +1,78 @@
+# CodeRabbit Configuration
+# Docs: https://docs.coderabbit.ai/
+
+language: "en-US"
+
+reviews:
+  # Review every PR automatically
+  auto_review:
+    enabled: true
+    drafts: false          # skip draft PRs
+    base_branches:
+      - "main"
+      - "develop"
+
+  # Customize review focus areas
+  profile: "chill"        # options: "chill" | "assertive"
+
+  # Path-specific instructions for reviewers
+  path_instructions:
+    - path: "sources/**/*.move"
+      instructions: |
+        This is a Sui Move smart contract. Review carefully for:
+        - Reentrancy risks or unsafe object transfers
+        - PTB (Programmable Transaction Block) composition attack vectors
+        - Proper use of `sui::transfer`, `sui::object`, and capability patterns
+        - Correct randomness usage (no predictable seeds)
+        - Pity system logic correctness
+        - Event emission completeness and correctness
+        - Overflow/underflow on u64 arithmetic
+
+    - path: "src/**/*.tsx"
+      instructions: |
+        This is a React + TypeScript frontend for a Sui dApp. Review for:
+        - Proper use of @mysten/dapp-kit hooks (useSignAndExecuteTransaction, etc.)
+        - Correct Transaction type imports (avoid mixing @mysten/sui and @mysten/dapp-kit)
+        - Wallet connection edge cases (disconnected, wrong network)
+        - Framer Motion animation prop correctness
+        - Accessibility (aria labels, keyboard nav)
+        - Console logs or debug code left in production paths
+
+    - path: "src/**/*.ts"
+      instructions: |
+        TypeScript utility/constants files. Review for:
+        - Correct Sui object ID formats (hex, 0x prefixed)
+        - Environment variable usage (should use import.meta.env not process.env)
+        - Type safety — avoid 'any'
+
+  # What to post inline vs summary
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false              # disable the fun poem at the end (keep reviews focused)
+  collapse_walkthrough: false
+
+  # Tools enabled during review
+  tools:
+    github-checks:
+      enabled: true
+    languagetool:
+      enabled: true        # grammar/spelling in comments and docs
+    biome:
+      enabled: true        # fast JS/TS linter (complements ESLint)
+    markdownlint:
+      enabled: true
+    shellcheck:
+      enabled: true
+
+# Chat settings (ask CodeRabbit questions in PR comments)
+chat:
+  auto_reply: true
+
+# Ignore generated/lock files
+ignore:
+  - "node_modules/**"
+  - "package-lock.json"
+  - "tsconfig.tsbuildinfo"
+  - "tsc-errors.txt"
+  - "dist/**"
+  - ".gitignore"
