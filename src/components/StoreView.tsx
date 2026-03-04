@@ -90,73 +90,101 @@ export default function StoreView() {
             )}
 
             {/* Box tier cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {BOX_TIERS.map((tier, idx) => (
-                    <motion.div
+            <div className="w-full max-w-4xl bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-4 mb-12 flex items-center justify-center gap-3 text-yellow-400 font-semibold shadow-[0_0_20px_rgba(234,179,8,0.1)]">
+                <span className="text-xl">⚠️</span>
+                Connect your wallet to access the store
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
+                {BOX_TIERS.map((tier) => (
+                    <div
                         key={tier.id}
-                        id={`box-tier-${tier.id}`}
-                        className={`glass-card p-6 flex flex-col gap-5 border ${tier.borderClass} ${tier.glowClass} group hover:scale-[1.02] transition-transform duration-300`}
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: idx * 0.1 }}
+                        className="relative group rounded-3xl p-[1px] bg-gradient-to-b from-space-700 to-space-800 hover:from-neon-cyan/50 hover:to-neon-purple/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(147,51,234,0.3)] overflow-hidden"
                     >
-                        {/* Box visual */}
-                        <div className="flex justify-center">
-                            <motion.div
-                                className="w-28 h-28 rounded-2xl flex items-center justify-center text-6xl relative"
-                                style={{ background: `linear-gradient(135deg, ${tier.accentColor}22, ${tier.accentColor}11)`, boxShadow: `0 0 30px ${tier.accentColor}44` }}
-                                animate={{ y: [0, -8, 0] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: idx * 0.3 }}
-                            >
-                                🎁
-                                <div className="absolute inset-0 rounded-2xl shimmer-bg" />
-                            </motion.div>
-                        </div>
+                        {/* Inner Card */}
+                        <div className="relative h-full bg-space-900/90 backdrop-blur-xl rounded-[23px] p-8 flex flex-col z-10">
 
-                        {/* Info */}
-                        <div className="text-center">
-                            <h3 className="text-xl font-bold text-white">{tier.name}</h3>
-                            <p className="text-3xl font-extrabold mt-1" style={{ color: tier.accentColor }}>{tier.price}</p>
-                        </div>
+                            {/* Animated Image Container */}
+                            <div className="flex justify-center mb-8 relative">
+                                <div className="absolute inset-0 bg-neon-purple/20 blur-3xl rounded-full group-hover:bg-neon-cyan/30 transition-colors duration-500"></div>
+                                <motion.img
+                                    src="/loot_box_hero.png"
+                                    alt="Loot Box"
+                                    className="w-48 h-48 object-contain drop-shadow-[0_0_20px_rgba(147,51,234,0.5)] cursor-pointer"
+                                    animate={{ y: [0, -10, 0] }}
+                                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                                />
+                            </div>
 
-                        {/* Odds table */}
-                        <div className="space-y-2">
-                            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">Drop Rates</p>
-                            {tier.odds.map(odd => (
-                                <div key={odd.label} className="flex items-center justify-between">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: odd.color, boxShadow: `0 0 6px ${odd.color}` }} />
-                                        <span className="text-sm text-slate-300">{odd.label}</span>
-                                    </div>
-                                    <span className="text-sm font-semibold font-mono" style={{ color: odd.color }}>{odd.chance}</span>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Buy button */}
-                        <button
-                            id={`buy-btn-${tier.id}`}
-                            disabled={!account || isPending || buyingTier === tier.id}
-                            onClick={() => handleBuy(tier)}
-                            className="w-full py-3 rounded-xl font-bold text-white transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed relative overflow-hidden"
-                            style={{
-                                background: `linear-gradient(135deg, ${tier.accentColor}cc, ${tier.accentColor}88)`,
-                                boxShadow: `0 0 20px ${tier.accentColor}55`,
-                            }}
-                        >
-                            {buyingTier === tier.id ? (
-                                <span className="flex items-center justify-center gap-2">
-                                    <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-                                    </svg>
-                                    Purchasing…
+                            <h2 className="text-2xl font-bold text-center mb-2">{tier.name}</h2>
+                            <div className="text-center mb-8">
+                                <span className={`text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r ${tier.color}`}>
+                                    {tier.price} SUI
                                 </span>
-                            ) : (
-                                `Buy Box — ${tier.price}`
-                            )}
-                        </button>
-                    </motion.div>
+                            </div>
+
+                            <div className="mb-8 flex-1">
+                                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                    <span className="w-full h-[1px] bg-space-700"></span>
+                                    CHANCES
+                                    <span className="w-full h-[1px] bg-space-700"></span>
+                                </h3>
+
+                                {/* Horizontal Stacked Bar */}
+                                <div className="h-4 w-full flex rounded-full overflow-hidden mb-6 opacity-90 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]">
+                                    <div style={{ width: `${tier.odds.common}%`, backgroundColor: '#cbd5e1' }} title={`Common: ${tier.odds.common}%`}></div>
+                                    <div style={{ width: `${tier.odds.rare}%`, backgroundColor: '#60a5fa' }} title={`Rare: ${tier.odds.rare}%`}></div>
+                                    <div style={{ width: `${tier.odds.epic}%`, backgroundColor: '#c084fc' }} title={`Epic: ${tier.odds.epic}%`}></div>
+                                    <div style={{ width: `${tier.odds.legendary}%`, backgroundColor: '#facc15' }} title={`Legendary: ${tier.odds.legendary}%`}></div>
+                                </div>
+
+                                {/* Legend */}
+                                <div className="grid grid-cols-2 gap-y-3 gap-x-2 text-sm">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-3 h-3 rounded-full bg-slate-300 shadow-[0_0_8px_rgba(203,213,225,0.6)]"></div>
+                                        <span className="text-slate-300">Common</span>
+                                        <span className="ml-auto font-mono text-gray-400">{tier.odds.common}%</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-3 h-3 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.6)]"></div>
+                                        <span className="text-blue-400">Rare</span>
+                                        <span className="ml-auto font-mono text-gray-400">{tier.odds.rare}%</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.6)]"></div>
+                                        <span className="text-purple-400">Epic</span>
+                                        <span className="ml-auto font-mono text-gray-400">{tier.odds.epic}%</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-3 h-3 rounded-full bg-yellow-400 shadow-[0_0_8px_rgba(250,204,21,0.6)]"></div>
+                                        <span className="text-yellow-400">Legendary</span>
+                                        <span className="ml-auto font-mono text-gray-400">{tier.odds.legendary}%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button
+                                id={`buy-btn-${tier.id}`}
+                                disabled={!account || isPending || buyingTier === tier.id}
+                                onClick={() => handleBuy(tier)}
+                                className="w-full py-3 rounded-xl font-bold text-white transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed relative overflow-hidden
+                                    bg-gradient-to-r from-neon-cyan to-neon-purple hover:from-neon-cyan/80 hover:to-neon-purple/80
+                                    shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(147,51,234,0.5)]"
+                            >
+                                {buyingTier === tier.id ? (
+                                    <span className="flex items-center justify-center gap-2">
+                                        <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                                        </svg>
+                                        Purchasing…
+                                    </span>
+                                ) : (
+                                    `Buy Box — ${tier.price}`
+                                )}
+                            </button>
+                        </div>
+                    </div>
                 ))}
             </div>
 

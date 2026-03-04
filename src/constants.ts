@@ -32,10 +32,14 @@ export interface BoxTier {
     name: string;
     price: string;
     priceInMist: bigint;
-    odds: { label: string; chance: string; color: string }[];
-    accentColor: string;
-    glowClass: string;
-    borderClass: string;
+    odds: {
+        common: number;
+        rare: number;
+        epic: number;
+        legendary: number;
+    };
+    color: string;
+    tierIndex: number;
 }
 
 export const BOX_TIERS: BoxTier[] = [
@@ -44,45 +48,42 @@ export const BOX_TIERS: BoxTier[] = [
         name: 'Standard Box',
         price: '0.5 SUI',
         priceInMist: BigInt(500_000_000),
-        odds: [
-            { label: 'Common', chance: '60%', color: '#94a3b8' },
-            { label: 'Rare', chance: '25%', color: '#60a5fa' },
-            { label: 'Epic', chance: '12%', color: '#a855f7' },
-            { label: 'Legendary', chance: '3%', color: '#fbbf24' },
-        ],
-        accentColor: '#60a5fa',
-        glowClass: 'shadow-[0_0_30px_rgba(96,165,250,0.4)]',
-        borderClass: 'border-blue-500/40',
+        tierIndex: 0,
+        color: 'from-blue-400 to-blue-500',
+        odds: {
+            common: 60,
+            rare: 25,
+            epic: 12,
+            legendary: 3
+        },
     },
     {
-        id: 'premium',
+        id: 'premium_box',
         name: 'Premium Box',
         price: '2 SUI',
         priceInMist: BigInt(2_000_000_000),
-        odds: [
-            { label: 'Common', chance: '30%', color: '#94a3b8' },
-            { label: 'Rare', chance: '35%', color: '#60a5fa' },
-            { label: 'Epic', chance: '25%', color: '#a855f7' },
-            { label: 'Legendary', chance: '10%', color: '#fbbf24' },
-        ],
-        accentColor: '#a855f7',
-        glowClass: 'shadow-[0_0_30px_rgba(168,85,247,0.5)]',
-        borderClass: 'border-purple-500/40',
+        tierIndex: 1,
+        color: 'from-purple-400 to-pink-500',
+        odds: {
+            common: 30,
+            rare: 35,
+            epic: 25,
+            legendary: 10
+        },
     },
     {
-        id: 'legendary',
+        id: 'legendary_box',
         name: 'Legendary Box',
         price: '5 SUI',
         priceInMist: BigInt(5_000_000_000),
-        odds: [
-            { label: 'Common', chance: '10%', color: '#94a3b8' },
-            { label: 'Rare', chance: '25%', color: '#60a5fa' },
-            { label: 'Epic', chance: '35%', color: '#a855f7' },
-            { label: 'Legendary', chance: '30%', color: '#fbbf24' },
-        ],
-        accentColor: '#fbbf24',
-        glowClass: 'shadow-[0_0_30px_rgba(251,191,36,0.6)]',
-        borderClass: 'border-yellow-500/40',
+        tierIndex: 2,
+        color: 'from-yellow-300 to-yellow-600',
+        odds: {
+            common: 10,
+            rare: 25,
+            epic: 35,
+            legendary: 30
+        },
     },
 ];
 

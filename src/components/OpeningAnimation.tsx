@@ -125,16 +125,11 @@ export default function OpeningAnimation({ lootBoxObjectId, onOpened }: Props) {
                         {openState !== 'opening' ? (
                             <motion.div
                                 key="box"
-                                className="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl cursor-pointer select-none"
-                                style={{
-                                    background: 'linear-gradient(135deg, rgba(168,85,247,0.3), rgba(34,211,238,0.2))',
-                                    border: '1px solid rgba(168,85,247,0.4)',
-                                    boxShadow: openState === 'shaking' ? '0 0 40px rgba(168,85,247,0.8)' : '0 0 15px rgba(168,85,247,0.3)',
-                                }}
+                                className="relative w-48 h-48 cursor-pointer drop-shadow-[0_0_20px_rgba(147,51,234,0.3)]"
                                 animate={boxAnimate}
                                 transition={boxTransition}
                             >
-                                🎁
+                                <img src="/loot_box_hero.png" alt="Loot Box" className="w-full h-full object-contain" />
                             </motion.div>
                         ) : (
                             <motion.div

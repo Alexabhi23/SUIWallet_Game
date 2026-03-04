@@ -11,17 +11,19 @@ export default {
                 mono: ['JetBrains Mono', 'monospace'],
             },
             colors: {
-                'neon-purple': '#a855f7',
-                'neon-cyan': '#22d3ee',
-                'neon-gold': '#fbbf24',
-                'neon-pink': '#ec4899',
-                'neon-green': '#4ade80',
-                'glass': 'rgba(255,255,255,0.05)',
-                'glass-border': 'rgba(255,255,255,0.12)',
-                'dark-900': '#080818',
-                'dark-800': '#0d0d2b',
-                'dark-700': '#12122f',
-                'dark-600': '#1a1a3f',
+                space: {
+                    900: '#050510',
+                    800: '#0f0f20',
+                    700: '#1a1a36',
+                },
+                neon: {
+                    purple: '#9333ea',
+                    purpleGlow: 'rgba(147, 51, 234, 0.5)',
+                    cyan: '#06b6d4',
+                    cyanGlow: 'rgba(6, 182, 212, 0.5)',
+                    gold: '#fbbf24',
+                    goldGlow: 'rgba(251, 191, 36, 0.5)'
+                }
             },
             boxShadow: {
                 'neon-purple': '0 0 20px rgba(168,85,247,0.5)',

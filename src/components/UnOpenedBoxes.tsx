@@ -40,10 +40,10 @@ export default function UnOpenedBoxes() {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="glass-card inline-block px-12 py-10 border border-purple-500/20"
+                    className="bg-space-800/80 backdrop-blur-xl inline-block px-12 py-10 border border-neon-purple/30 rounded-3xl shadow-[0_0_40px_rgba(147,51,234,0.15)]"
                 >
-                    <div className="text-6xl mb-4">🔒</div>
-                    <h3 className="text-xl font-bold text-white mb-2">Wallet Not Connected</h3>
+                    <div className="text-6xl mb-6 drop-shadow-[0_0_15px_rgba(147,51,234,0.5)]">🔒</div>
+                    <h3 className="text-2xl font-black text-white mb-3">Wallet Not Connected</h3>
                     <p className="text-slate-400">Connect your wallet to see your unopened loot boxes.</p>
                 </motion.div>
             </div>
@@ -60,8 +60,8 @@ export default function UnOpenedBoxes() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
             >
-                <h2 className="text-4xl font-extrabold mb-3"
-                    style={{ background: 'linear-gradient(90deg, #c084fc, #22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                <h2 className="text-5xl font-black mb-4 tracking-tight"
+                    style={{ background: 'linear-gradient(90deg, #9333ea, #06b6d4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', filter: 'drop-shadow(0 0 20px rgba(147,51,234,0.3))' }}>
                     My Unopened Boxes
                 </h2>
                 <p className="text-slate-400">Click "Open" on any box to reveal your GameItem NFT</p>
@@ -92,9 +92,11 @@ export default function UnOpenedBoxes() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center py-20"
                 >
-                    <div className="glass-card inline-block px-12 py-10 border border-purple-500/20">
-                        <div className="text-6xl mb-4 animate-bounce">📦</div>
-                        <h3 className="text-xl font-bold text-white mb-2">No Unopened Boxes</h3>
+                    <div className="bg-space-800/80 backdrop-blur-xl inline-block px-12 py-10 border border-neon-cyan/30 rounded-3xl shadow-[0_0_40px_rgba(6,182,212,0.15)]">
+                        <div className="flex justify-center mb-6">
+                            <img src="/loot_box_hero.png" alt="Empty" className="w-24 h-24 object-contain opacity-50 grayscale" />
+                        </div>
+                        <h3 className="text-2xl font-black text-white mb-3">No Unopened Boxes</h3>
                         <p className="text-slate-400 mb-4">Head to the Store to purchase your first loot box!</p>
                     </div>
                 </motion.div>
@@ -122,21 +124,21 @@ export default function UnOpenedBoxes() {
                                 <motion.div
                                     key={objectId}
                                     id={`lootbox-card-${objectId.slice(-6)}`}
-                                    className="glass-card p-4 flex flex-col items-center gap-3 border hover:border-purple-400/60 transition-all duration-300"
-                                    style={{ borderColor: `${tierColor}44` }}
-                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    className="bg-space-800/60 backdrop-blur-md rounded-2xl p-6 flex flex-col items-center gap-4 border transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(147,51,234,0.2)] hover:bg-space-800/80"
+                                    style={{ borderColor: `${tierColor}55` }}
+                                    initial={{ opacity: 0, scale: 0.9 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.5 }}
-                                    transition={{ delay: idx * 0.05 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    transition={{ delay: idx * 0.05, type: "spring" }}
                                 >
-                                    <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: tierColor }}>
+                                    <p className="text-sm font-black uppercase tracking-[0.2em]" style={{ color: tierColor, textShadow: `0 0 10px ${tierColor}88` }}>
                                         {tierName}
                                     </p>
                                     <OpeningAnimation
                                         lootBoxObjectId={objectId}
                                         onOpened={handleBoxOpened}
                                     />
-                                    <p className="text-xs font-mono text-slate-600 truncate w-full text-center">
+                                    <p className="text-xs font-mono text-slate-500 truncate w-full text-center mt-2 bg-space-900/50 py-1 rounded-md border border-space-700">
                                         {objectId.slice(0, 6)}…{objectId.slice(-4)}
                                     </p>
                                 </motion.div>

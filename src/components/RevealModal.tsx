@@ -89,15 +89,15 @@ export default function RevealModal({ item, onClose }: Props) {
                     ))}
 
                     <motion.div
-                        className="relative glass-card p-8 max-w-md w-full text-center overflow-hidden"
+                        className="relative bg-space-900/90 backdrop-blur-2xl p-10 rounded-[32px] max-w-md w-full text-center overflow-hidden"
                         style={{
-                            border: `1px solid ${RARITY_CONFIG[item.rarity].color}66`,
-                            boxShadow: RARITY_CONFIG[item.rarity].glow,
+                            border: `1px solid ${RARITY_CONFIG[item.rarity].color}88`,
+                            boxShadow: `0 0 60px ${RARITY_CONFIG[item.rarity].color}44, inset 0 0 30px ${RARITY_CONFIG[item.rarity].color}22`,
                         }}
-                        initial={{ scale: 0.5, rotateY: -90, opacity: 0 }}
-                        animate={{ scale: 1, rotateY: 0, opacity: 1 }}
-                        exit={{ scale: 0.5, opacity: 0 }}
-                        transition={{ type: 'spring', stiffness: 200, damping: 20, delay: 0.1 }}
+                        initial={{ scale: 0.8, y: 50, opacity: 0 }}
+                        animate={{ scale: 1, y: 0, opacity: 1 }}
+                        exit={{ scale: 0.8, opacity: 0, filter: 'blur(10px)' }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 25, delay: 0.1 }}
                     >
                         {/* Shimmer overlay */}
                         <div className="absolute inset-0 shimmer-bg pointer-events-none" />
@@ -149,10 +149,10 @@ export default function RevealModal({ item, onClose }: Props) {
 
                         {/* Item name */}
                         <motion.h3
-                            className="text-2xl font-extrabold text-white mb-2"
-                            initial={{ opacity: 0, y: 10 }}
+                            className="text-3xl font-black text-white mb-3 tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
+                            transition={{ delay: 0.5, type: 'spring' }}
                         >
                             {item.name}
                         </motion.h3>
@@ -193,18 +193,19 @@ export default function RevealModal({ item, onClose }: Props) {
                         <motion.button
                             id="reveal-modal-close"
                             onClick={onClose}
-                            className="w-full py-3 rounded-xl font-bold text-white transition-all duration-300"
+                            className="w-full py-4 rounded-2xl font-black text-white transition-all duration-300 tracking-wide text-lg mt-4"
                             style={{
-                                background: `linear-gradient(135deg, ${RARITY_CONFIG[item.rarity].color}cc, ${RARITY_CONFIG[item.rarity].color}66)`,
-                                boxShadow: RARITY_CONFIG[item.rarity].glow,
+                                background: `linear-gradient(135deg, ${RARITY_CONFIG[item.rarity].color}, ${RARITY_CONFIG[item.rarity].color}88)`,
+                                boxShadow: `0 8px 32px ${RARITY_CONFIG[item.rarity].color}66`,
+                                textShadow: '0 2px 4px rgba(0,0,0,0.5)'
                             }}
-                            initial={{ opacity: 0, y: 10 }}
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8 }}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
+                            transition={{ delay: 0.8, type: 'spring' }}
+                            whileHover={{ scale: 1.03, filter: 'brightness(1.2)' }}
+                            whileTap={{ scale: 0.97 }}
                         >
-                            Claim & Continue →
+                            CLAIM & CONTINUE
                         </motion.button>
                     </motion.div>
                 </motion.div>
